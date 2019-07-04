@@ -1,12 +1,12 @@
 from django.db import models
 
 class Carro(models.Model):
-    desricao = models.CharField((""), max_length=50)
+    desricao = models.CharField(max_length=50)
 
 class Cliente(models.Model):
-    nome = models.CharField((""), max_length=50)
-    email = models.CharField((""), max_length=50)
-    senha = models.CharField((""), max_length=50)
+    nome = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    senha = models.CharField(max_length=50)
 
 class Aluguel(models.Model):
     cliente = models.ForeignKey(Cliente,on_delete = models.SET_NULL, null = True)
