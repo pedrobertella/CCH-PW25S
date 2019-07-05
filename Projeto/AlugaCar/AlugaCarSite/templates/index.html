@@ -16,7 +16,6 @@
 	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
 	<link rel="icon" href="{% static 'img/icone.png' %}" />
 </head>
-
 <body>
 	<!-- HEADER -->
 	<header>
@@ -29,7 +28,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="#" class="logo">
+							<a href="/" class="logo">
 								<img src="{% static '/img/banner.png' %}" alt="" width='225'>
 							</a>
 						</div>
@@ -52,7 +51,6 @@
 						</div>
 					</div>
 					<!-- /SEARCH BAR -->
-
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
@@ -70,13 +68,11 @@
 									aria-expanded="true">
 									<i class="fa fa-user"></i>
 									<span>{{cliente.nome}}</span>
-
 								</a>
 								{% endif %}
 
-							</div>
-							<!-- /Cart -->
 
+							</div>
 							<!-- Menu Toogle -->
 							<div class="menu-toggle">
 								<a href="#">
@@ -105,9 +101,9 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="#">Início</a></li>
-					<li><a href="#">Veículos</a></li>
-					<li><a href="#">Contato</a></li>
+					<li class="active"><a href="/">Início</a></li>
+					<li><a href="#veiculos">Veículos</a></li>
+					<li><a href="#contato">Contato</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>
@@ -116,38 +112,8 @@
 		<!-- /container -->
 	</nav>
 	<!-- /NAVIGATION -->
-	<!-- SECTION -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				<!-- shop -->
-				{% for car in carros %}
-				{% if car.disponivel%}
-				<div class="col-md-4 col-xs-6">
-					<div class="shop">
-						<div class="shop-img">
-							<img src="{% static '/img/palio.jpeg' %}" alt="">
-						</div>
-						<div class="shop-body">
-							<h3>{{car.descricao}}</h3>
-							<a href="#" class="cta-btn">Alugar <i class="fa fa-arrow-circle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				{% endif %}
 
-				{% endfor %}
-
-
-			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /SECTION -->
-	<!-- SECTION -->
+<!-- SECTION -->
 	<div class="section">
 		<!-- container -->
 		<div class="container">
@@ -157,7 +123,7 @@
 				<!-- section title -->
 				<div class="col-md-12">
 					<div class="section-title">
-						<h3 class="title">Mais alugados</h3>
+						<h3 class="title">Destaques</h3>
 					</div>
 				</div>
 				<!-- /section title -->
@@ -168,7 +134,8 @@
 							<!-- tab -->
 							<div id="tab1" class="tab-pane active">
 								<div class="products-slick" data-nav="#slick-nav-1">
-									<!-- product -->
+									{% for car in carros %}
+									{% if car.disponivel %}
 									<div class="product">
 										<div class="product-img">
 											<img src="{% static '/img/palio.jpeg' %}" alt="">
@@ -177,84 +144,16 @@
 											</div>
 										</div>
 										<div class="product-body">
-											<h3 class="product-name"><a href="#">Palio Fire</a></h3>
-											<h4 class="product-price">R$25,00</h4>
+											<h3 class="product-name"><a href="#">{{car.descricao}}</a></h3>
+											<h4 class="product-price">R$ {{car.valorDia}}</h4>
 										</div>
 										<div class="add-to-cart">
 											<button class="add-to-cart-btn"><i class="fa fa-car"></i> Alugar</button>
 										</div>
 									</div>
-									<!-- /product -->
-
-									<!-- product -->
-									<div class="product">
-										<div class="product-img">
-											<img src="{% static '/img/palio.jpeg' %}" alt="">
-											<div class="product-label">
-												<span class="sale">Oferta</span>
-											</div>
-										</div>
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">Palio Fire</a></h3>
-											<h4 class="product-price">R$25,00</h4>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-car"></i> Alugar</button>
-										</div>
-									</div>
-									<!-- /product -->
-									<!-- product -->
-									<div class="product">
-										<div class="product-img">
-											<img src="{% static '/img/palio.jpeg' %}" alt="">
-											<div class="product-label">
-												<span class="sale">Oferta</span>
-											</div>
-										</div>
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">Palio Fire</a></h3>
-											<h4 class="product-price">R$25,00</h4>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-car"></i> Alugar</button>
-										</div>
-									</div>
-									<!-- /product -->
-
-									<!-- product -->
-									<div class="product">
-										<div class="product-img">
-											<img src="{% static '/img/palio.jpeg' %}" alt="">
-											<div class="product-label">
-												<span class="sale">Oferta</span>
-											</div>
-										</div>
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">Palio Fire</a></h3>
-											<h4 class="product-price">R$25,00</h4>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-car"></i> Alugar</button>
-										</div>
-									</div>
-									<!-- /product -->
-									<!-- product -->
-									<div class="product">
-										<div class="product-img">
-											<img src="{% static '/img/palio.jpeg' %}" alt="">
-											<div class="product-label">
-												<span class="sale">Oferta</span>
-											</div>
-										</div>
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">Palio Fire</a></h3>
-											<h4 class="product-price">R$25,00</h4>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-car"></i> Alugar</button>
-										</div>
-									</div>
-									<!-- /product -->
+									{% endif %}
+									{% endfor %}
+								
 								</div>
 								<div id="slick-nav-1" class="products-slick-nav"></div>
 							</div>
@@ -269,10 +168,40 @@
 		<!-- /container -->
 	</div>
 	<!-- /SECTION -->
+
+	<!-- SECTION -->
+	<div class="section" id="veiculos">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- shop -->
+				{% for car in carros %}
+				{% if car.disponivel %}
+				<div class="col-md-4 col-xs-6">
+					<div class="shop">
+						<div class="shop-img">
+							<img src="{% static '/img/palio.jpeg' %}" alt="">
+						</div>
+						<div class="shop-body">
+							<h3>{{car.descricao}}</h3>
+							<a href="#" class="cta-btn">Alugar <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+	
 	<!-- FOOTER -->
 	<footer id="footer">
 		<!-- top footer -->
-		<div class="section">
+		<div class="section" id="contato">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -282,9 +211,9 @@
 							<h3 class="footer-title">Sobre a AlugaCar</h3>
 							<p>Trabalhamos há 62 anos no ramo de aluguel de veículos.</p>
 							<ul class="footer-links">
-								<li><a href="#"><i class="fa fa-map-marker"></i>Avenida 08 de Setembro</a></li>
-								<li><a href="#"><i class="fa fa-phone"></i>(46) 5566-6589</a></li>
-								<li><a href="#"><i class="fa fa-envelope-o"></i>contato@alugacar.com.br</a></li>
+								<li><a href="https://www.google.com/maps/search/?api=1&query=UTFPR+Dois+Vizinhos"><i class="fa fa-map-marker"></i>Avenida 08 de Setembro, 4488, Dois Vizinhos - PR</a></li>
+								<li><a href="tel:4655666589"><i class="fa fa-phone"></i>(46) 5566-6589</a></li>
+								<li><a href="mailto:contato@alugacar.com.br"><i class="fa fa-envelope-o"></i>contato@alugacar.com.br</a></li>
 							</ul>
 						</div>
 					</div>
@@ -301,12 +230,12 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<ul class="footer-payments">
-							<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-							<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+							<li><i class="fa fa-cc-visa"></i></li>
+							<li><i class="fa fa-credit-card"></i></li>
+							<li><i class="fa fa-cc-paypal"></i></li>
+							<li><i class="fa fa-cc-mastercard"></i></li>
+							<li><i class="fa fa-cc-discover"></i></li>
+							<li><i class="fa fa-cc-amex"></i></li>
 						</ul>
 						<span class="copyright">
 							Copyright AlugaCar &copy;

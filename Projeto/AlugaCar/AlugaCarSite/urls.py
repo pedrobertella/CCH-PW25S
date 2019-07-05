@@ -7,4 +7,5 @@ urlpatterns = [
     path("login", login_user,name="login_user"),
     path("user_page", user_page,name="user_page"),
     path("delete/<int:id>", cancelar_aluguel,name="cancelar_aluguel")
+
 ]
