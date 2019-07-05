@@ -18,3 +18,4 @@ class Aluguel(models.Model):
     dataAlugado = models.DateField()
     diasAluguel = models.IntegerField()
     valorPagar = models.DecimalField(max_digits=10, decimal_places=2)
+

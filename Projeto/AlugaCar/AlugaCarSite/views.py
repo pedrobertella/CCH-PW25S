@@ -3,15 +3,21 @@ from .form import ClienteForm,LoginUserForm
 from .models import Cliente
 
 def home(request):
-    return render(request, "index.html")
+    id = request.session.get('login', None)
+    if not id:
+        user = Cliente("-1","Login","-1") 
+    else:
+        user = Cliente.objects.get(id=id)
+    return render(request, "index.html",{'cliente':user})
 
 def cadastro_user(request):
     form = ClienteForm(request.POST or None)
     if(form.is_valid()):
         print("Salvando usario")
         form.save()
-        return redirect("")
+        return redirect("home")
     return render(request, 'cadastro_user.html', {'form':form})
+
 def login_user(request):
     form = LoginUserForm(request.POST or None)
     if(form.is_valid()):
@@ -22,5 +28,7 @@ def login_user(request):
             if(i.email == email):
                 if(i.senha == senha):
                     print("Usuario logado")
-                    redirect("home",{"user":i})
+                    print(i)
+                    request.session['login'] = i.id
+                    return redirect('home')
     return render(request,'login.html',{'form':form})

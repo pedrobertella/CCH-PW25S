@@ -488,7 +488,25 @@ textarea.input {
   border: none;
   border-radius: 0px 40px 40px 0px;
 }
-
+.login{
+  padding: 15px 0px;
+  text-align: center;
+}
+form button{
+  height: 40px;
+  background: #FF9E49;
+  color: #FFF;
+  font-weight: 700;
+  width: 130px;
+  border: none;
+  border-radius: 40px 40px 40px 40px;
+}
+form button:hover{
+  color:#FF9E49;
+  background:  rgb(255, 249, 244);
+  border-width: thick;
+  box-shadow: 8px 7px 0 0px rgba(0, 0, 0, 1);
+}
 /*----------------------------*\
 	Cart
 \*----------------------------*/
