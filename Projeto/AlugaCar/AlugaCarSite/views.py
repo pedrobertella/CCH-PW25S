@@ -31,5 +31,7 @@ def login_user(request):
                     print("Usuario logado")
                     print(i)
                     request.session['login'] = i.id
-                    return redirect('home')
+                    user = Cliente.objects.get(id=i.id)
+                    carros = Carro.objects.all()
+                    return render(request, "index.html",{'cliente':user,'carros':carros})
     return render(request,'login.html',{'form':form})
