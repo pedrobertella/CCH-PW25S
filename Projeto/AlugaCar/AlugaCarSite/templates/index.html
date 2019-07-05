@@ -56,15 +56,23 @@
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
-
 							<div class="dropdown">
+								{% if cliente.nome != "Login" %}
+								<a href="{% url 'user_page' %}" class="dropdown-toggle" data-toggle="dropdown"
+									aria-expanded="true">
+									<i class="fa fa-user"></i>
+									<span>{{cliente.nome}}</span>
 
+								</a>
+								{% endif %}
+								{% if cliente.nome == "Login" %}
 								<a href="{% url 'login_user' %}" class="dropdown-toggle" data-toggle="dropdown"
 									aria-expanded="true">
 									<i class="fa fa-user"></i>
 									<span>{{cliente.nome}}</span>
 
 								</a>
+								{% endif %}
 
 							</div>
 							<!-- /Cart -->
