@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
-from.form import ClienteForm,LoginUserForm
-from.models import Cliente
+from .form import ClienteForm,LoginUserForm
+from .models import Cliente
+
+def home(request):
+    return render(request, "index.html")
 
 def cadastro_user(request):
     form = ClienteForm(request.POST or None)
