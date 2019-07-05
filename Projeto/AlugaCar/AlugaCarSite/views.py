@@ -19,5 +19,5 @@ def login_user(request):
             if(i.email == email):
                 if(i.senha == senha):
                     print("Usuario logado")
-                    redirect("home")
+                    redirect("home",{"user":i})
     return render(request,'login.html',{'form':form})
