@@ -27,7 +27,7 @@
 					<!-- LOGO -->
 					<div class="col-md-3">
 						<div class="header-logo">
-							<a href="#" class="logo">
+							<a href="{% url 'home' %}" class="logo">
 								<img src="{% static '/img/banner.png' %}" alt="" width='225'>
 							</a>
 						</div>
@@ -112,6 +112,8 @@
     {% endfor %}
     </div>
     <div class="col-md-3">
+
+	<a href="{% url 'home_deslog' %}" >Sair</a>
     <h3> Alterar Dados</h3>
     <label>Nome : </label>{{cliente.nome}}
     <br>
@@ -122,6 +124,64 @@
 
     </div>
     </div>
-
+	<!-- FOOTER -->
+	<footer id="footer">
+		<!-- top footer -->
+		<div class="section" id="contato">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-3 col-xs-6">
+						<div class="footer">
+							<h3 class="footer-title">Sobre a AlugaCar</h3>
+							<p>Trabalhamos há 62 anos no ramo de aluguel de veículos.</p>
+							<ul class="footer-links">
+								<li><a href="https://www.google.com/maps/search/?api=1&query=UTFPR+Dois+Vizinhos"><i class="fa fa-map-marker"></i>Avenida 08 de Setembro, 4488, Dois Vizinhos - PR</a></li>
+								<li><a href="tel:4655666589"><i class="fa fa-phone"></i>(46) 5566-6589</a></li>
+								<li><a href="mailto:contato@alugacar.com.br"><i class="fa fa-envelope-o"></i>contato@alugacar.com.br</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /top footer -->
+		<!-- bottom footer -->
+		<div id="bottom-footer" class="section">
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<ul class="footer-payments">
+							<li><i class="fa fa-cc-visa"></i></li>
+							<li><i class="fa fa-credit-card"></i></li>
+							<li><i class="fa fa-cc-paypal"></i></li>
+							<li><i class="fa fa-cc-mastercard"></i></li>
+							<li><i class="fa fa-cc-discover"></i></li>
+							<li><i class="fa fa-cc-amex"></i></li>
+						</ul>
+						<span class="copyright">
+							Copyright AlugaCar &copy;
+							<script>document.write(new Date().getFullYear());</script>
+						</span>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /bottom footer -->
+	</footer>
+	<!-- /FOOTER -->
+	<!-- jQuery Plugins -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/slick.min.js' %}"></script>
+	<script src="{% static 'js/nouislider.min.js' %}"></script>
+	<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

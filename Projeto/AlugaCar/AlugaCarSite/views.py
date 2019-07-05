@@ -5,7 +5,7 @@ from .models import Cliente,Carro,Aluguel
 
 def home(request):
     id = request.session.get('login', None)
-    if not id:
+    if not id or id<0:
         user = Cliente("-1","Login","-1") 
     else:
         user = Cliente.objects.get(id=id)
@@ -30,8 +30,7 @@ def login_user(request):
         for i in users:
             if(i.email == email):
                 if(i.senha == senha):
-                    print("Usuario logado")
-                    print(i)
+                    request.session.set_expiry(0)
                     request.session['login'] = i.id
                     user = Cliente.objects.get(id=i.id)
                     carros = Carro.objects.all()
@@ -39,7 +38,11 @@ def login_user(request):
     return render(request,'login.html',{'form':form})
 
 def user_page(request):
-    user = Cliente.objects.get(id=request.session.get('login'))
+    iduser=request.session.get('login')
+    if iduser < 0 or not iduser:
+        return redirect("home")
+
+    user = Cliente.objects.get(id=iduser)
     alu = Aluguel.objects.all()
     alugueis=[]
     for i in alu:
@@ -51,3 +54,8 @@ def user_page(request):
 def cancelar_aluguel(request,id):
     Aluguel.objects.get(id=id).delete()
     return redirect("user_page")
+
+
+def home_deslog(request):
+    request.session["login"] =-1
+    return redirect("home")
