@@ -6,9 +6,16 @@ class Carro(models.Model):
     valorDia = models.DecimalField(max_digits=10, decimal_places=2)
     marca = models.CharField(max_length=25)
     modelo = models.CharField(max_length=25)
-    caminhoFoto = models.FileField()
+    caminhoFoto = models.ImageField(null=True, blank = True,upload_to='AlugaCarSite/static/galeria/carros')
     def __str__(self):
         return self.descricao
+
+    def getfoto(self):
+        dir = str(self.caminhoFoto)
+        print(dir,"--------------->")
+        dir = dir[20:]
+        print(dir)
+        return dir
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=50)
