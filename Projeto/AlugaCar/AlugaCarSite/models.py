@@ -1,11 +1,20 @@
 from django.db import models
+class Modelo(models.Model):
+    nome = models.CharField(max_length=50)
+    def __str__(self):
+        return self.nome
+
+class Marca(models.Model):
+    nome = models.CharField(max_length=50)
+    def __str__(self):
+        return self.nome
 
 class Carro(models.Model):
     descricao = models.CharField(max_length=50)
     disponivel = models.BooleanField(default=True)
     valorDia = models.DecimalField(max_digits=10, decimal_places=2)
-    marca = models.CharField(max_length=25)
-    modelo = models.CharField(max_length=25)
+    marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
+    modelo = models.ForeignKey(Modelo,on_delete=models.CASCADE)
     caminhoFoto = models.ImageField(null=True, blank = True,upload_to='AlugaCarSite/static/galeria/carros')
     def __str__(self):
         return self.descricao
