@@ -113,16 +113,24 @@ def alugar_confirm(request,id):
     form = AluguelForm(request.POST or None)
     car = Carro.objects.get(id=id)
     if form.is_valid():
-        dias = float(request.POST['diasAluguel'])
-        data = request.POST['dataAlugado']
-        d = datetime.strptime(data, '%Y-%m-%d').date()
-        cl = Cliente.objects.get(id=request.session.get('login'))
-        val = dias * float(car.valorDia)
-        alug = Aluguel(cliente=cl,carrro=car,diasAluguel=dias,valorPagar = val,dataAlugado = d)
-        alug.save()
-        #car.disponivel = False
-        car.save()
-        return redirect("user_page")
+        user_id =request.session.get('login')
+        if(not user_id is None):
+            if user_id > 0:
+                cl = Cliente.objects.get(id=user_id)
+                dias = float(request.POST['diasAluguel'])
+                data = request.POST['dataAlugado']
+                d = datetime.strptime(data, '%Y-%m-%d').date()
+                val = dias * float(car.valorDia)
+                alug = Aluguel(cliente=cl,carrro=car,diasAluguel=dias,valorPagar = val,dataAlugado = d)
+                alug.save()
+                #car.disponivel = False
+                car.save()
+                return redirect("user_page")
+            else:
+                return redirect("login_user")
+        else:
+                return redirect("login_user")
+
     return render(request,"confirm.html",{'carro':car,'form':form})
 
 def alugar(request,id):

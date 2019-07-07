@@ -28,8 +28,10 @@
         }
         function load(){
             document.getElementById("id_dataAlugado").type = "date"
-             document.getElementById("id_diasAluguel").onchange = calculavalor
-        }
+            document.getElementById("id_diasAluguel").onchange = calculavalor
+            document.getElementById("id_diasAluguel").min = "1"
+            document.getElementById("id_diasAluguel").style.width = "10%"
+                        }
          window.onload = load
     </script>
 <body>

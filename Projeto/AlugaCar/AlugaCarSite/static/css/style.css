@@ -126,17 +126,17 @@ ul, ol {
 
 /*-- Text input --*/
 
-.input, #id_pesquisa {
+.input, #id_dataAlugado {
   height: 40px;
   padding: 0px 15px;
   border: 1px solid #E4E7ED;
   background-color: #FFF;
-  width: 100%;
+  width: 40%;
 }
 
-textarea.input {
+textarea #id_dataAlugado {
   padding: 15px;
-  min-height: 90px;
+  min-height: 10px;
 }
 
 /*-- Number input --*/
