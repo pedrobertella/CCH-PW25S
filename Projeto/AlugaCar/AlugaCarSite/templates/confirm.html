@@ -15,83 +15,83 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="icon" href="{% static 'img/icone.png' %}" />
-    
-</head>
-<script>      
 
-        function calculavalor(){
-            
-            var valor= parseFloat(document.getElementById("valordia").innerText)
-            var dias = parseFloat(document.getElementById("id_diasAluguel").value)
-            var total = valor*dias          
-            var totalReais = "R$ " + String(total) + ",00" 
-            document.getElementById("valor").innerHTML = totalReais
-        }
-        function load(){
-            document.getElementById("id_dataAlugado").type = "date"
-            document.getElementById("id_diasAluguel").onchange = calculavalor
-            document.getElementById("id_diasAluguel").min = "1"
-            document.getElementById("id_diasAluguel").style.width = "10%"
-                        }
-         window.onload = load
-    </script>
+</head>
+<script>
+
+    function calculavalor() {
+
+        var valor = parseFloat(document.getElementById("valordia").innerText)
+        var dias = parseFloat(document.getElementById("id_diasAluguel").value)
+        var total = valor * dias
+        var totalReais = "R$ " + String(total) + ",00"
+        document.getElementById("valor").innerHTML = totalReais
+    }
+    function load() {
+        document.getElementById("id_dataAlugado").type = "date"
+        document.getElementById("id_diasAluguel").onchange = calculavalor
+        document.getElementById("id_diasAluguel").min = "1"
+        document.getElementById("id_diasAluguel").style.width = "10%"
+    }
+    window.onload = load
+</script>
+
 <body>
     <!-- HEADER -->
     <header>
         <!-- MAIN HEADER -->
-		<div id="header">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<!-- LOGO -->
-					<div class="col-md-9">
-						<div class="header-logo">
-							<a href="/" class="logo">
-								<img src="{% static '/img/banner.png' %}" alt="" width='225'>
-							</a>
-						</div>
-					</div>
-					<!-- /LOGO -->
+        <div id="header">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-9">
+                        <div class="header-logo">
+                            <a href="/" class="logo">
+                                <img src="{% static '/img/banner.png' %}" alt="" width='225'>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+                    
+                    <!-- ACCOUNT -->
+                    <div class="col-md-3 clearfix">
+                        <div class="header-ctn">
+                            <div class="dropdown">
+                                {% if cliente.nome != "Login" %}
+                                <a href="{% url 'user_page' %}" class="dropdown-toggle" aria-expanded="true">
+                                    <i class="fa fa-user"></i>
+                                    <span>{{cliente.nome}}</span>
 
-					
-					<!-- ACCOUNT -->
-					<div class="col-md-3 clearfix">
-						<div class="header-ctn">
-							<div class="dropdown">
-								{% if cliente.nome != "Login" %}
-								<a href="{% url 'user_page' %}" class="dropdown-toggle" aria-expanded="true">
-									<i class="fa fa-user"></i>
-									<span>{{cliente.nome}}</span>
-
-								</a>
-								{% endif %}
-								{% if cliente.nome == "Login" %}
-								<a href="{% url 'login_user' %}" class="dropdown-toggle" aria-expanded="true">
-									<i class="fa fa-user"></i>
-									<span>{{cliente.nome}}</span>
-								</a>
-								{% endif %}
+                                </a>
+                                {% endif %}
+                                {% if cliente.nome == "Login" %}
+                                <a href="{% url 'login_user' %}" class="dropdown-toggle" aria-expanded="true">
+                                    <i class="fa fa-user"></i>
+                                    <span>{{cliente.nome}}</span>
+                                </a>
+                                {% endif %}
 
 
-							</div>
-							<!-- Menu Toogle -->
-							<div class="menu-toggle">
-								<a href="#">
-									<i class="fa fa-bars"></i>
-									<span>Menu</span>
-								</a>
-							</div>
-							<!-- /Menu Toogle -->
-						</div>
-					</div>
-					<!-- /ACCOUNT -->
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- /MAIN HEADER -->
+                            </div>
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- /MAIN HEADER -->
     </header>
     <!-- /HEADER -->
 
@@ -116,6 +116,9 @@
                         {{form.dataAlugado}}<br><br>
                         <button type="submit">Alugar</button>
                     </form>
+                    </br>
+                    </br>
+                    <button type="button" class="secondary-btn" onClick="window.location.href='/'">Voltar</button>
                 </div>
             </div>
         </div>
@@ -187,4 +190,3 @@
 </body>
 
 </html>
-
