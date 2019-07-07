@@ -191,7 +191,8 @@
 												<h4 class="product-price">R$ {{car.valorDia}}</h4>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-car"></i>
+												<button class="add-to-cart-btn" onclick="location.href='{% url "confirmar_aluguel" car.id %}'">
+													<i class="fa fa-car"></i>
 													Alugar</button>
 											</div>
 										</div>

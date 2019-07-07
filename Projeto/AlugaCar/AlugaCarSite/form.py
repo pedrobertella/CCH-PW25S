@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Cliente
+from .models import Cliente, Aluguel
 
 class ClienteForm(forms.ModelForm):
     class Meta:
@@ -13,3 +13,8 @@ class LoginUserForm(forms.ModelForm):
         "senha": forms.PasswordInput(),
         }
         fields = {"email","senha"}
+
+class AluguelForm(forms.ModelForm):
+    class Meta:
+        model = Aluguel
+        fields = {"diasAluguel","dataAlugado"}

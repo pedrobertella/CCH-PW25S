@@ -60,6 +60,18 @@ body {
   color: #333;
 }
 
+
+.detalhes{
+  margin: 10%;
+  float: left;
+  width: 100%;
+  align-items: center;
+}
+.detalhes .detalhesImg, .detalhes .detalhesText{
+  width: 50%;
+  float: left;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #2B2D42;
   font-weight: 700;

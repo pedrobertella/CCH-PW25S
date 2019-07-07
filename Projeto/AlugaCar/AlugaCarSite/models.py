@@ -34,9 +34,15 @@ class Cliente(models.Model):
         return self.nome
 
 class Aluguel(models.Model):
+    '''def __init__(self,cl,car,alugue,dias,valor):
+        self.cliente=cl
+        self.carro=car
+        self.dataAlugado = alugue
+        self.diasAluguel=dias
+        self.valorPagar = valor'''
     cliente = models.ForeignKey(Cliente,on_delete = models.SET_NULL, null = True)
     carrro = models.ForeignKey(Carro, on_delete=models.CASCADE, null = False)
-    dataAlugado = models.DateField()
-    diasAluguel = models.IntegerField()
+    #dataAlugado = models.DateField()
+    diasAluguel = models.IntegerField(null=True)
     valorPagar = models.DecimalField(max_digits=10, decimal_places=2)
 

@@ -1,6 +1,6 @@
 
 from django.shortcuts import render,redirect
-from .form import ClienteForm,LoginUserForm
+from .form import ClienteForm,LoginUserForm,AluguelForm
 from .models import Cliente,Carro,Aluguel,Marca
 
 def home(request):
@@ -45,18 +45,44 @@ def user_page(request):
 
     user = Cliente.objects.get(id=iduser)
     alu = Aluguel.objects.all()
-    alugueis=[]
+    alugueis = []
+    carros = []
     for i in alu:
         if i.cliente.id == user.id:
             alugueis.append(i)
-
-    return render(request,"user_page.html",{"cliente":user,'alugueis':alugueis})
+    return render(request,"user_page.html",{"cliente":user,'alugueis':alugueis,'carros':carros})
 
 def cancelar_aluguel(request,id):
-    Aluguel.objects.get(id=id).delete()
+    al = Aluguel.objects.get(id=id)
+    car = Carro.objects.get(id= al.carrro.id)
+    car.disponivel = True
+    car.save() 
+    al.delete()
     return redirect("user_page")
 
 
 def home_deslog(request):
     request.session["login"] =-1
     return redirect("home")
+
+def alugar_confirm(request,id):
+    form = AluguelForm(request.POST or None)
+    car = Carro.objects.get(id=id)
+    if form.is_valid():
+        dias = float(request.POST['diasAluguel'])
+        cl = Cliente.objects.get(id=request.session.get('login'))
+        val = dias * float(car.valorDia)
+        alug = Aluguel(cliente=cl,carrro=car,diasAluguel=dias,valorPagar = val)
+        alug.save()
+        car.disponivel = False
+        car.save()
+        return redirect("user_page")
+    return render(request,"confirm.html",{'carro':car,'form':form})
+
+def alugar(request,id):
+    cliente = Cliente.objects.get(request.session.get('login'))
+    carro = Carro.objects.get(id=id)
+    alug = Aluguel(cliente=cliente,carro=carro)
+    alug.save()
+    return redirect("user_page")
+

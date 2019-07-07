@@ -97,13 +97,15 @@
     <div class="row"> 
     <div class="col-md-9">
     {% for i in alugueis %}
-        <div class="col-md-4 col-xs-6">
+        <div class="col-md-6 col-xs-12">
 					<div class="shop">
 						<div class="shop-img">
-							<img src="{% static '/img/palio.jpeg' %}" alt="">
+							<img src="{% static i.carrro.getfoto %}" alt="">
 						</div>
 						<div class="shop-body">
-							<h3>{{i.cliente}}</h3>
+							<h4>{{i.carrro}}</h4>
+							<h5>Valor a pagar: R${{i.valorPagar}}</h5>
+							<h5>Dias de aluguel: {{i.diasAluguel}}</h5>
 							<a href="{% url 'cancelar_aluguel' i.id %}" class="cta-btn">Cancelar<i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
