@@ -1,9 +1,9 @@
-from datetime import datetime
+from datetime import datetime,date
 from django.shortcuts import render,redirect
-from .form import ClienteForm,LoginUserForm,AluguelForm
+from .form import ClienteForm,LoginUserForm,AluguelForm,PesquisaForm
 from .models import Cliente,Carro,Aluguel,Marca
 
-def home(request):
+'''def home(request):
     id = request.session.get('login', None)
     if not id or id<0:
         user = Cliente("-1","Login","-1") 
@@ -11,12 +11,56 @@ def home(request):
         user = Cliente.objects.get(id=id)
     carros = Carro.objects.all()
     marcas = Marca.objects.all()
-    return render(request, "index.html",{'cliente':user,'carros':carros,'marcas':marcas})
+
+    alugueis = Aluguel.objects.all()
+    horarios =[]
+    for i in carros:
+        hor = car_hor(i.carro.id)
+        for j in alugueis:
+            if(j.carro.id == i.id):
+                hor.addHorario(j.dataAlugado)
+                p=0
+                while p<j.diasAluguel:
+                    prox = date.fromordinal(j.dataAlugado.toordinal()+p)
+                    hor.addHorario(prox)
+                    p+=1
+        horarios.append(hor)
+        
+    return render(request, "index.html",{'cliente':user,'carros':carros,'marcas':marcas,'horarios':horarios})
+'''
+def home(request):
+    form = PesquisaForm(request.POST or None)
+    id = request.session.get('login', None)
+    if not id or id<0:
+        user = Cliente("-1","Login","-1") 
+    else:
+        user = Cliente.objects.get(id=id)
+    carros = Carro.objects.all()
+    marcas = Marca.objects.all()
+    if (form.is_valid()):
+        data = request.POST['dataAlugado']
+        d = datetime.strptime(data, '%Y-%m-%d').date()
+        alugueis = Aluguel.objects.all()
+        cars =[]
+        for i in carros:
+            disponivel = True
+            for j in alugueis:
+                if(j.carrro.id == i.id):
+                    p=0
+                    while( p < j.diasAluguel):
+                        prox = date.fromordinal(j.dataAlugado.toordinal()+p)
+                        if(prox == d):
+                            disponivel=False
+                        p+=1
+            if(disponivel):
+                cars.append(i)
+        return render(request,"index.html",{'cliente':user,'carros':cars,'marcas':marcas,"form":form}) 
+        
+    return render(request, "index.html",{'cliente':user,'carros':carros,'marcas':marcas,"form":form})
 
 def cadastro_user(request):
     form = ClienteForm(request.POST or None)
     if(form.is_valid()):
-        print("Salvando usario")
         form.save()
         return redirect("home")
     return render(request, 'cadastro_user.html', {'form':form})
@@ -72,12 +116,11 @@ def alugar_confirm(request,id):
         dias = float(request.POST['diasAluguel'])
         data = request.POST['dataAlugado']
         d = datetime.strptime(data, '%Y-%m-%d').date()
-        print(d)
         cl = Cliente.objects.get(id=request.session.get('login'))
         val = dias * float(car.valorDia)
         alug = Aluguel(cliente=cl,carrro=car,diasAluguel=dias,valorPagar = val,dataAlugado = d)
         alug.save()
-        car.disponivel = False
+        #car.disponivel = False
         car.save()
         return redirect("user_page")
     return render(request,"confirm.html",{'carro':car,'form':form})

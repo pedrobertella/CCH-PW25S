@@ -58,6 +58,11 @@
 			}
 		}
 	}
+	function estilo(){
+		document.getElementById("id_dataAlugado").type = "date"
+	}
+	window.onload = estilo
+	
 </script>
 
 <body>
@@ -82,15 +87,17 @@
 					<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
-							<form>
+							<form method="POST">
+                    			{% csrf_token %}
 								<select class="input-select" id="selectMarcas" onchange="filtrarMarcas()">
 									<option value="0">Todos</option>
 									{% for i in marcas %}
 									<option value="{{i.nome}}">{{i.nome}}</option>
 									{% endfor %}
-								</select>
-								<input class="input" placeholder="Pesquisar">
-								<button class="search-btn">Pesquisar</button>
+								</select>								
+								{{form.dataAlugado}}
+								<button class="search-btn" type="submit">Pesquisar</button>
+								</form>
 							</form>
 						</div>
 					</div>

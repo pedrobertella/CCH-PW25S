@@ -21,9 +21,7 @@ class Carro(models.Model):
 
     def getfoto(self):
         dir = str(self.caminhoFoto)
-        print(dir,"--------------->")
         dir = dir[20:]
-        print(dir)
         return dir
 
 class Cliente(models.Model):

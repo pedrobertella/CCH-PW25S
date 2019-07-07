@@ -126,7 +126,7 @@ ul, ol {
 
 /*-- Text input --*/
 
-.input {
+.input, #id_pesquisa {
   height: 40px;
   padding: 0px 15px;
   border: 1px solid #E4E7ED;

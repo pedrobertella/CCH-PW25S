@@ -4,6 +4,11 @@ from django import forms
 
 from .models import Cliente, Aluguel
 
+class PesquisaForm(forms.ModelForm):
+    class Meta:
+        model = Aluguel
+        fields = {"dataAlugado"}        
+
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente

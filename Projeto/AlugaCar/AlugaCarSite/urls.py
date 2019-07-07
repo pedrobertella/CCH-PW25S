@@ -9,6 +9,6 @@ urlpatterns = [
     path("delete/<int:id>", cancelar_aluguel,name="cancelar_aluguel"),
     path("deslog",home_deslog,name="home_deslog"),
     path("alugar/<int:id>", alugar_confirm,name="confirmar_aluguel"),
-    path("alugado/<int:id>", alugar,name="alugar")
+    path("alugado/<int:id>", alugar,name="alugar"),
 
 ]
