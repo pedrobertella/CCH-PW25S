@@ -123,7 +123,7 @@ def alugar_confirm(request,id):
                 val = dias * float(car.valorDia)
                 alug = Aluguel(cliente=cl,carrro=car,diasAluguel=dias,valorPagar = val,dataAlugado = d)
                 alug.save()
-                #car.disponivel = False
+                car.disponivel = False
                 car.save()
                 return redirect("user_page")
             else:

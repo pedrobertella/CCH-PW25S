@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
 	<link rel="icon" href="{% static 'img/icone.png' %}" />
+
 </head>
 <script>
 	function filtrarMarcas() {
@@ -58,11 +59,11 @@
 			}
 		}
 	}
-	function estilo(){
+	function estilo() {
 		document.getElementById("id_dataAlugado").type = "date"
 	}
 	window.onload = estilo
-	
+
 </script>
 
 <body>
@@ -88,16 +89,16 @@
 					<div class="col-md-6">
 						<div class="header-search">
 							<form method="POST">
-                    			{% csrf_token %}
+								{% csrf_token %}
 								<select class="input-select" id="selectMarcas" onchange="filtrarMarcas()">
 									<option value="0">Todos</option>
 									{% for i in marcas %}
 									<option value="{{i.nome}}">{{i.nome}}</option>
 									{% endfor %}
-								</select>								
+								</select>
 								{{form.dataAlugado}}
 								<button class="search-btn" type="submit">Pesquisar</button>
-								</form>
+							</form>
 							</form>
 						</div>
 					</div>
@@ -185,25 +186,26 @@
 								<div class="products-slick" data-nav="#slick-nav-1">
 									{% for car in carros %}
 									{% if car.disponivel %}
-									
-										<div class="product c{{car.marca.id }}">
-											<div class="product-img">
-												<img src="{% static car.getfoto %}" alt="">
-												<div class="product-label">
-													<span class="sale">Oferta</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">{{car.descricao}}</a></h3>
-												<h4 class="product-price">R$ {{car.valorDia}}</h4>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn" onclick="location.href='{% url "confirmar_aluguel" car.id %}'">
-													<i class="fa fa-car"></i>
-													Alugar</button>
+
+									<div class="product c{{car.marca.id }}">
+										<div class="product-img">
+											<img src="{% static car.getfoto %}" alt="" height="180">
+											<div class="product-label">
+												<span class="sale">Oferta</span>
 											</div>
 										</div>
-								
+										<div class="product-body">
+											<h3 class="product-name"><a href="#">{{car.descricao}}</a></h3>
+											<h4 class="product-price">R$ {{car.valorDia}}</h4>
+										</div>
+										<div class="add-to-cart">
+											<button class="add-to-cart-btn"
+												onclick="location.href='{% url 'confirmar_aluguel' car.id %}'">
+												<i class="fa fa-car"></i>
+												Alugar</button>
+										</div>
+									</div>
+
 									{% endif %}
 									{% endfor %}
 
@@ -238,7 +240,7 @@
 						</div>
 						<div class="shop-body">
 							<h3>{{car.descricao}}</h3>
-							<a href="#" class="cta-btn">Alugar <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="{% url 'confirmar_aluguel' car.id %}" class="cta-btn">Alugar <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>

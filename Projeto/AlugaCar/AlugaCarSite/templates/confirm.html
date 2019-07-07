@@ -15,16 +15,17 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="icon" href="{% static 'img/icone.png' %}" />
+    
 </head>
-<script>
-        
-        
+<script>      
+
         function calculavalor(){
             
             var valor= parseFloat(document.getElementById("valordia").innerText)
             var dias = parseFloat(document.getElementById("id_diasAluguel").value)
-            var total = valor*dias           
-            document.getElementById("valor").innerHTML = String(total)
+            var total = valor*dias          
+            var totalReais = "R$ " + String(total) + ",00" 
+            document.getElementById("valor").innerHTML = totalReais
         }
         function load(){
             document.getElementById("id_dataAlugado").type = "date"
@@ -38,63 +39,59 @@
     <!-- HEADER -->
     <header>
         <!-- MAIN HEADER -->
-        <div id="header">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <!-- LOGO -->
-                    <div class="col-md-3">
-                        <div class="header-logo">
-                            <a href="/" class="logo">
-                                <img src="{% static '/img/banner.png' %}" alt="" width='225'>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- /LOGO -->
+		<div id="header">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-9">
+						<div class="header-logo">
+							<a href="/" class="logo">
+								<img src="{% static '/img/banner.png' %}" alt="" width='225'>
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
 
-                    <!-- SEARCH BAR -->
-                    <div class="col-md-6">
-                        <div class="header-search">
-                            <form>
-                                <select class="input-select">
-                                    <option value="0">Todos</option>
-                                    <option value="1">Fiat</option>
-                                    <option value="2">Volkswagen</option>
-                                    <option value="3">Ford</option>
-                                </select>
-                                <input class="input" placeholder="Pesquisar">
-                                <button class="search-btn">Pesquisar</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- /SEARCH BAR -->
-                    <!-- ACCOUNT -->
-                    <div class="col-md-3 clearfix">
-                        <div class="header-ctn">
-                            <div class="dropdown">
-                                <a href="/login" class="dropdown-toggle" aria-expanded="true">
-                                    <i class="fa fa-user"></i>
-                                    <span>{{cliente.nome}}</span>
-                                </a>
-                            </div>
-                            <!-- Menu Toogle -->
-                            <div class="menu-toggle">
-                                <a href="#">
-                                    <i class="fa fa-bars"></i>
-                                    <span>Menu</span>
-                                </a>
-                            </div>
-                            <!-- /Menu Toogle -->
-                        </div>
-                    </div>
-                    <!-- /ACCOUNT -->
-                </div>
-                <!-- row -->
-            </div>
-            <!-- container -->
-        </div>
-        <!-- /MAIN HEADER -->
+					
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							<div class="dropdown">
+								{% if cliente.nome != "Login" %}
+								<a href="{% url 'user_page' %}" class="dropdown-toggle" aria-expanded="true">
+									<i class="fa fa-user"></i>
+									<span>{{cliente.nome}}</span>
+
+								</a>
+								{% endif %}
+								{% if cliente.nome == "Login" %}
+								<a href="{% url 'login_user' %}" class="dropdown-toggle" aria-expanded="true">
+									<i class="fa fa-user"></i>
+									<span>{{cliente.nome}}</span>
+								</a>
+								{% endif %}
+
+
+							</div>
+							<!-- Menu Toogle -->
+							<div class="menu-toggle">
+								<a href="#">
+									<i class="fa fa-bars"></i>
+									<span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
     </header>
     <!-- /HEADER -->
 
@@ -103,27 +100,26 @@
     <div class="container">
         <div class="row">
             <div class="detalhes">
-                <div class="detalhesImg"><img src="{% static carro.getfoto %}"></div>
+                <div class="detalhesImg"><img src="{% static carro.getfoto %}" height="300"></div>
                 <div class="detalhesText">
-                    {{carro.descricao}}<br>
-                    {{carro.marca.nome}}<br>
-                    {{carro.modelo}}<br>
-                    Valor por dia: <label id="valordia">{{carro.valorDia}}</label><br>
-                    <form method="POST">
-                    {% csrf_token %}
-                    Selecione a quantidade de dias :<br>
-                    {{form.diasAluguel}}<br>
-                    Total: <label id="valor">0,00</label>
+                    <h1 class="product-name">{{carro.descricao}}</h1>
+                    <h3 class="product-price">Valor por dia: <label id="valordia">{{carro.valorDia}}</label></h3><br>
+                    <h4 class="product-name">{{carro.marca.nome}}</h4>
+                    <h4 class="product-name">{{carro.modelo}}<br></h4>
+                    <form method="POST" id="formzera">
+                        {% csrf_token %}
+                        <h5>Selecione a quantidade de dias:</h5>
+                        {{form.diasAluguel}}<br><br>
+                        <h5>Total: <label id="valor">R$ 0,00</label></h5>
+                        <h5>Data:</h5>
 
-                    {{form.dataAlugado}}<br>
-                    <button type="submit" >Alugar</button>
+                        {{form.dataAlugado}}<br><br>
+                        <button type="submit">Alugar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-
     <!-- /CORPO -->
     <!-- FOOTER -->
     <footer id="footer">
@@ -180,6 +176,7 @@
         <!-- /bottom footer -->
     </footer>
     <!-- /FOOTER -->
+
     <!-- jQuery Plugins -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
