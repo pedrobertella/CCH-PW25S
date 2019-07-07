@@ -16,6 +16,50 @@
 	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
 	<link rel="icon" href="{% static 'img/icone.png' %}" />
 </head>
+<script>
+	function filtrarMarcas() {
+		var selectMarcas = document.getElementById("selectMarcas");
+		var s = selectMarcas.selectedIndex;
+		var tam = selectMarcas.length;
+		var selecionado = "c";
+		var ele;
+		var divs = document.getElementsByClassName("c1")
+
+		for (var i = 1; i < tam; i++) {
+			selecionado = selecionado.concat(String(i))
+			if (document.getElementsByClassName(selecionado) != null) {
+				ele = document.getElementsByClassName(selecionado)
+				for (var j = 0; j < ele.length; j++) {
+					ele[j].style.display = "inline"
+				}
+			}
+			selecionado = "c"
+		}
+		if (s != 0) {
+			for (var i = 1; i < tam; i++) {
+
+				if (s == i) {
+					if (document.getElementsByClassName(selecionado.concat(String(s))) != null) {
+						ele = document.getElementsByClassName(selecionado.concat(String(s)))
+						ele = document.getElementsByClassName(selecionado)
+						for (var j = 0; j < ele.length; j++) {
+							ele[j].style.display = "inline"
+						}
+					}
+				} else {
+					if (document.getElementsByClassName(selecionado.concat(String(i))) != null) {
+						ele = document.getElementsByClassName((selecionado.concat(String(i))))
+						for (var j = 0; j < ele.length; j++) {
+							ele[j].style.display = "none"
+						}
+					}
+				}
+
+			}
+		}
+	}
+</script>
+
 <body>
 	<!-- HEADER -->
 	<header>
@@ -39,11 +83,11 @@
 					<div class="col-md-6">
 						<div class="header-search">
 							<form>
-								<select class="input-select">
+								<select class="input-select" id="selectMarcas" onchange="filtrarMarcas()">
 									<option value="0">Todos</option>
-									<option value="1">Fiat</option>
-									<option value="2">Volkswagen</option>
-									<option value="3">Ford</option>
+									{% for i in marcas %}
+									<option value="{{i.nome}}">{{i.nome}}</option>
+									{% endfor %}
 								</select>
 								<input class="input" placeholder="Pesquisar">
 								<button class="search-btn">Pesquisar</button>
@@ -56,16 +100,14 @@
 						<div class="header-ctn">
 							<div class="dropdown">
 								{% if cliente.nome != "Login" %}
-								<a href="{% url 'user_page' %}" class="dropdown-toggle"
-									aria-expanded="true">
+								<a href="{% url 'user_page' %}" class="dropdown-toggle" aria-expanded="true">
 									<i class="fa fa-user"></i>
 									<span>{{cliente.nome}}</span>
 
 								</a>
 								{% endif %}
 								{% if cliente.nome == "Login" %}
-								<a href="{% url 'login_user' %}" class="dropdown-toggle"
-									aria-expanded="true">
+								<a href="{% url 'login_user' %}" class="dropdown-toggle" aria-expanded="true">
 									<i class="fa fa-user"></i>
 									<span>{{cliente.nome}}</span>
 								</a>
@@ -113,7 +155,7 @@
 	</nav>
 	<!-- /NAVIGATION -->
 
-<!-- SECTION -->
+	<!-- SECTION -->
 	<div class="section">
 		<!-- container -->
 		<div class="container">
@@ -136,24 +178,27 @@
 								<div class="products-slick" data-nav="#slick-nav-1">
 									{% for car in carros %}
 									{% if car.disponivel %}
-									<div class="product">
-										<div class="product-img">
-											<img src="{% static car.getfoto %}" alt="">
-											<div class="product-label">
-												<span class="sale">Oferta</span>
+									
+										<div class="product c{{car.marca.id }}">
+											<div class="product-img">
+												<img src="{% static car.getfoto %}" alt="">
+												<div class="product-label">
+													<span class="sale">Oferta</span>
+												</div>
+											</div>
+											<div class="product-body">
+												<h3 class="product-name"><a href="#">{{car.descricao}}</a></h3>
+												<h4 class="product-price">R$ {{car.valorDia}}</h4>
+											</div>
+											<div class="add-to-cart">
+												<button class="add-to-cart-btn"><i class="fa fa-car"></i>
+													Alugar</button>
 											</div>
 										</div>
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">{{car.descricao}}</a></h3>
-											<h4 class="product-price">R$ {{car.valorDia}}</h4>
-										</div>
-										<div class="add-to-cart">
-											<button class="add-to-cart-btn"><i class="fa fa-car"></i> Alugar</button>
-										</div>
-									</div>
+								
 									{% endif %}
 									{% endfor %}
-								
+
 								</div>
 								<div id="slick-nav-1" class="products-slick-nav"></div>
 							</div>
@@ -197,7 +242,7 @@
 		<!-- /container -->
 	</div>
 	<!-- /SECTION -->
-	
+
 	<!-- FOOTER -->
 	<footer id="footer">
 		<!-- top footer -->
@@ -211,9 +256,12 @@
 							<h3 class="footer-title">Sobre a AlugaCar</h3>
 							<p>Trabalhamos há 62 anos no ramo de aluguel de veículos.</p>
 							<ul class="footer-links">
-								<li><a href="https://www.google.com/maps/search/?api=1&query=UTFPR+Dois+Vizinhos"><i class="fa fa-map-marker"></i>Avenida 08 de Setembro, 4488, Dois Vizinhos - PR</a></li>
+								<li><a href="https://www.google.com/maps/search/?api=1&query=UTFPR+Dois+Vizinhos"><i
+											class="fa fa-map-marker"></i>Avenida 08 de Setembro, 4488, Dois Vizinhos -
+										PR</a></li>
 								<li><a href="tel:4655666589"><i class="fa fa-phone"></i>(46) 5566-6589</a></li>
-								<li><a href="mailto:contato@alugacar.com.br"><i class="fa fa-envelope-o"></i>contato@alugacar.com.br</a></li>
+								<li><a href="mailto:contato@alugacar.com.br"><i
+											class="fa fa-envelope-o"></i>contato@alugacar.com.br</a></li>
 							</ul>
 						</div>
 					</div>

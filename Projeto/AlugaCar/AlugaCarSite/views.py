@@ -1,7 +1,7 @@
 
 from django.shortcuts import render,redirect
 from .form import ClienteForm,LoginUserForm
-from .models import Cliente,Carro,Aluguel
+from .models import Cliente,Carro,Aluguel,Marca
 
 def home(request):
     id = request.session.get('login', None)
@@ -10,7 +10,8 @@ def home(request):
     else:
         user = Cliente.objects.get(id=id)
     carros = Carro.objects.all()
-    return render(request, "index.html",{'cliente':user,'carros':carros})
+    marcas = Marca.objects.all()
+    return render(request, "index.html",{'cliente':user,'carros':carros,'marcas':marcas})
 
 def cadastro_user(request):
     form = ClienteForm(request.POST or None)
