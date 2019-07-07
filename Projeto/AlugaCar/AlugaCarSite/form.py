@@ -1,4 +1,6 @@
+import datetime
 from django import forms
+
 
 from .models import Cliente, Aluguel
 
@@ -17,4 +19,7 @@ class LoginUserForm(forms.ModelForm):
 class AluguelForm(forms.ModelForm):
     class Meta:
         model = Aluguel
+        widgets ={
+            'dataAlugado': forms.DateTimeInput()
+        }
         fields = {"diasAluguel","dataAlugado"}

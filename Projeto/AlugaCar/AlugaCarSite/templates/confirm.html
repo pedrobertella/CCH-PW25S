@@ -27,6 +27,7 @@
             document.getElementById("valor").innerHTML = String(total)
         }
         function load(){
+            document.getElementById("id_dataAlugado").type = "date"
              document.getElementById("id_diasAluguel").onchange = calculavalor
         }
          window.onload = load
@@ -111,7 +112,8 @@
                     Selecione a quantidade de dias :<br>
                     {{form.diasAluguel}}<br>
                     Total: <label id="valor">0,00</label>
-                    {{form.dataAlugado}}
+
+                    {{form.dataAlugado}}<br>
                     <button type="submit" >Alugar</button>
                     </form>
                 </div>

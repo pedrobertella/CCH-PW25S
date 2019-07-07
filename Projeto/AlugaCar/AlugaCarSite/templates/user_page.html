@@ -105,7 +105,9 @@
 						<div class="shop-body">
 							<h4>{{i.carrro}}</h4>
 							<h5>Valor a pagar: R${{i.valorPagar}}</h5>
+							<h5>Data alugado: {{i.dataAlugado}}</h5>
 							<h5>Dias de aluguel: {{i.diasAluguel}}</h5>
+							
 							<a href="{% url 'cancelar_aluguel' i.id %}" class="cta-btn">Cancelar<i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>

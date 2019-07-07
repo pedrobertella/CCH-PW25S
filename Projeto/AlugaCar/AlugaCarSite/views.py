@@ -1,4 +1,4 @@
-
+from datetime import datetime
 from django.shortcuts import render,redirect
 from .form import ClienteForm,LoginUserForm,AluguelForm
 from .models import Cliente,Carro,Aluguel,Marca
@@ -70,9 +70,12 @@ def alugar_confirm(request,id):
     car = Carro.objects.get(id=id)
     if form.is_valid():
         dias = float(request.POST['diasAluguel'])
+        data = request.POST['dataAlugado']
+        d = datetime.strptime(data, '%Y-%m-%d').date()
+        print(d)
         cl = Cliente.objects.get(id=request.session.get('login'))
         val = dias * float(car.valorDia)
-        alug = Aluguel(cliente=cl,carrro=car,diasAluguel=dias,valorPagar = val)
+        alug = Aluguel(cliente=cl,carrro=car,diasAluguel=dias,valorPagar = val,dataAlugado = d)
         alug.save()
         car.disponivel = False
         car.save()
