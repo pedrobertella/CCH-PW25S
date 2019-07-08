@@ -167,7 +167,8 @@ def cancelar_aluguel_admin(request, id):
 
 def apaga_user_admin(request, id):
     user = Cliente.objects.get(id=id)
-    user.delete()
+    if user.nome!='admin':
+        user.delete()
     return redirect("admin_page")
 
 def apaga_marca(request, id):
