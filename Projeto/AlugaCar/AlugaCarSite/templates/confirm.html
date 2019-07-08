@@ -1,6 +1,7 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,13 +25,14 @@
         document.getElementById("valor").innerHTML = totalReais
     }
     function load() {
-        document.getElementById("id_dataAlugado").type = "date"
         document.getElementById("id_diasAluguel").onchange = calculavalor
         document.getElementById("id_diasAluguel").min = "1"
+        document.getElementById("id_diasAluguel").max = document.getElementById("dias").innerText
         document.getElementById("id_diasAluguel").style.width = "10%"
     }
     window.onload = load
 </script>
+
 <body>
     <header>
         <div id="header">
@@ -80,13 +82,20 @@
                     <h3 class="product-price">Valor por dia: <label id="valordia">{{carro.valorDia}}</label></h3><br>
                     <h4 class="product-name">{{carro.marca.nome}}</h4>
                     <h4 class="product-name">{{carro.modelo}}<br></h4>
+                    <h5>Data de aluguel:
+                        {{data}}<br>
+                    </h5>
+                    <h5>
+                        Máximo de dias Disponíveis:
+                        <label id="dias">{{maxdias}}</label>
+                    </h5>
                     <form method="POST" id="formzera">
                         {% csrf_token %}
                         <h5>Selecione a quantidade de dias:</h5>
+
                         {{form.diasAluguel}}<br><br>
                         <h5>Total: <label id="valor">R$ 0,00</label></h5>
-                        <h5>Data:</h5>
-                        {{form.dataAlugado}}<br><br>
+
                         <button type="submit">Alugar</button>
                     </form>
                     </br>
@@ -145,4 +154,5 @@
     <script src="{% static 'js/jquery.zoom.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
+
 </html>

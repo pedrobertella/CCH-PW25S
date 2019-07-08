@@ -58,8 +58,38 @@
 		}
 	}
 	function estilo() {
-		document.getElementById("id_dataAlugado").type = "date"
+		var d = document.getElementById("id_dataAlugado")
+		d.type = "date"
+	
+		var p = new Date()
+		console.log(p)
+		s = String(p.getFullYear())
+		s = s.concat('-')
+		var aux = p.getMonth()+1
+		if(aux/10<1){
+			s = s.concat('0')
+		}
+		s = s.concat(String(aux))
+		s = s.concat('-')
+		aux = p.getDate()
+		if(aux /10<1){
+			s = s.concat('0')
+		}
+		s = s.concat(String(aux))
+		d.min = s
+
+		if(d.value == ""){
+			d.value = s
+		}
+		
 	}
+
+	function alugar(id){
+		var dat = document.getElementById("id_dataAlugado").value
+		var rota = "/alugar/"+String(id)+"/"+String(dat)
+		window.location.href = rota
+	}
+
 	window.onload = estilo
 </script>
 <body>
@@ -158,7 +188,7 @@
 										</div>
 										<div class="add-to-cart">
 											<button class="add-to-cart-btn"
-												onclick="location.href='{% url 'confirmar_aluguel' car.id %}'">
+												onclick="alugar({{car.id}})">
 												<i class="fa fa-car"></i>
 												Alugar</button>
 										</div>
@@ -186,7 +216,7 @@
 						</div>
 						<div class="shop-body">
 							<h3>{{car.descricao}}</h3>
-							<a href="{% url 'confirmar_aluguel' car.id %}" class="cta-btn">Alugar <i class="fa fa-arrow-circle-right"></i></a>
+							<a onclick="alugar({{car.id}})" class="cta-btn">Alugar <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>

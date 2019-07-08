@@ -25,10 +25,7 @@ class LoginUserForm(forms.ModelForm):
 class AluguelForm(forms.ModelForm):
     class Meta:
         model = Aluguel
-        widgets ={
-            'dataAlugado': forms.DateTimeInput()
-        }
-        fields = {"diasAluguel","dataAlugado"}
+        fields = {"diasAluguel"}
 
 class MarcaForm(forms.ModelForm):
     class Meta:

@@ -40,7 +40,7 @@ class Aluguel(models.Model):
         self.valorPagar = valor'''
     cliente = models.ForeignKey(Cliente,on_delete = models.SET_NULL, null = True)
     carrro = models.ForeignKey(Carro, on_delete=models.CASCADE, null = False)
-    dataAlugado = models.DateField(auto_now=False, auto_now_add=False,null=True)
+    dataAlugado = models.DateField(auto_now=False, auto_now_add=False,null=False)
     diasAluguel = models.IntegerField(null=True)
     valorPagar = models.DecimalField(max_digits=10, decimal_places=2)
 

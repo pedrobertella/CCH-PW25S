@@ -39,26 +39,69 @@ def home(request):
         user = Cliente.objects.get(id=id)
     carros = Carro.objects.all()
     marcas = Marca.objects.all()
+    d = date.today()
+    form.fields['dataAlugado'].initial = d
     if (form.is_valid()):
         data = request.POST['dataAlugado']
         d = datetime.strptime(data, '%Y-%m-%d').date()
-        alugueis = Aluguel.objects.all()
-        cars = []
-        for i in carros:
-            disponivel = True
-            for j in alugueis:
-                if(j.carrro.id == i.id):
-                    p = 0
-                    while(p < j.diasAluguel):
-                        prox = date.fromordinal(j.dataAlugado.toordinal()+p)
-                        if(prox == d):
-                            disponivel = False
-                        p += 1
-            if(disponivel):
-                cars.append(i)
-        return render(request, "index.html", {'cliente': user, 'carros': cars, 'marcas': marcas, "form": form})
+    alugueis = Aluguel.objects.all()
+    cars = []
+    for i in carros:
+        disponivel = True
+        for j in alugueis:
+            if(j.carrro.id == i.id):
+                p = 0
+                while(p < j.diasAluguel):
+                    prox = date.fromordinal(j.dataAlugado.toordinal()+p)
+                    if(prox == d):
+                        disponivel = False
+                    p += 1
+        if(disponivel):
+            cars.append(i)
+    return render(request, "index.html", {'cliente': user, 'carros': cars, 'marcas': marcas, "form": form})
 
-    return render(request, "index.html", {'cliente': user, 'carros': carros, 'marcas': marcas, "form": form})
+
+def alugar_confirm(request, id,dat):
+    dat = datetime.strptime(dat, '%Y-%m-%d').date()
+    form = AluguelForm(request.POST or None)
+    car = Carro.objects.get(id=id)
+    alugueis = Aluguel.objects.all()
+    tem_alguma = False
+    for i in alugueis:
+        if i.carrro.id == car.id:
+            if(date.fromordinal((i.dataAlugado).toordinal()+ i.diasAluguel) > dat):
+                if(not tem_alguma):
+                    tem_alguma = True
+                    menor = i.dataAlugado
+                else:
+                    if(i.dataAlugado < menor):
+                        menor = i.dataAlugado
+    if(tem_alguma):
+        maximodias = menor - dat
+        maximodias = maximodias.days
+    else:
+        maximodias = 30
+    print(maximodias)
+    if form.is_valid():
+        user_id = request.session.get('login')
+        if(not user_id is None):
+            if user_id > 0:
+                cl = Cliente.objects.get(id=user_id)
+                dias = float(request.POST['diasAluguel'])
+                val = dias * float(car.valorDia)
+                alug = Aluguel(cliente=cl, carrro=car,
+                               diasAluguel=dias, valorPagar=val, dataAlugado=dat)
+                alug.save()
+                #car.disponivel = False
+                car.save()
+                return redirect("user_page")
+            else:
+                return redirect("login_user")
+        else:
+            return redirect("login_user")
+
+    return render(request, "confirm.html", {'carro': car, 'form': form,"maxdias":maximodias,"data":dat})
+
 
 
 def cadastro_user(request):
@@ -190,32 +233,6 @@ def apaga_carro(request, id):
 def home_deslog(request):
     request.session["login"] = -1
     return redirect("home")
-
-
-def alugar_confirm(request, id):
-    form = AluguelForm(request.POST or None)
-    car = Carro.objects.get(id=id)
-    if form.is_valid():
-        user_id = request.session.get('login')
-        if(not user_id is None):
-            if user_id > 0:
-                cl = Cliente.objects.get(id=user_id)
-                dias = float(request.POST['diasAluguel'])
-                data = request.POST['dataAlugado']
-                d = datetime.strptime(data, '%Y-%m-%d').date()
-                val = dias * float(car.valorDia)
-                alug = Aluguel(cliente=cl, carrro=car,
-                               diasAluguel=dias, valorPagar=val, dataAlugado=d)
-                alug.save()
-                car.disponivel = False
-                car.save()
-                return redirect("user_page")
-            else:
-                return redirect("login_user")
-        else:
-            return redirect("login_user")
-
-    return render(request, "confirm.html", {'carro': car, 'form': form})
 
 
 def alugar(request, id):
