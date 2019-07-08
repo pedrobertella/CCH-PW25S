@@ -173,9 +173,7 @@
 											<h4 class="product-price">R$ {{alu.valorPagar}}</h4>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn">
-												<i class="fa fa-ban"></i>
-												Cancelar</button>
+												<a href="{% url 'cancelar_aluguel_admin' alu.id %}" onclick="return confirm('Deseja cancelar o aluguel deste carro?');"><button class="add-to-cart-btn"><i class="fa fa-ban"></i>Cancelar</button></a>
 										</div>
 									</div>
 									{% endfor %}
@@ -222,9 +220,7 @@
 											<h4 class="product-price">{{user.email}}</h4>
 										</div>
 										<div class="add-to-cart">
-											<button class="add-to-cart-btn">
-												<i class="fa fa-times"></i>
-												Apagar</button>
+												<a href="{% url 'apaga_user_admin' user.id %}" onclick="return confirm('Deseja apagar este usuário?');"><button class="add-to-cart-btn"><i class="fa fa-times"></i>Apagar</button></a>
 										</div>
 									</div>
 									{% endfor %}

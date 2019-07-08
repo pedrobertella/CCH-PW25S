@@ -127,6 +127,18 @@ def cancelar_aluguel(request, id):
     al.delete()
     return redirect("user_page")
 
+def cancelar_aluguel_admin(request, id):
+    al = Aluguel.objects.get(id=id)
+    car = Carro.objects.get(id=al.carrro.id)
+    car.disponivel = True
+    car.save()
+    al.delete()
+    return redirect("admin_page")
+
+def apaga_user_admin(request, id):
+    user = Cliente.objects.get(id=id)
+    user.delete()
+    return redirect("admin_page")
 
 def home_deslog(request):
     request.session["login"] = -1
