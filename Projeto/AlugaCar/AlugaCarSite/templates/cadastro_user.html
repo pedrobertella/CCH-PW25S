@@ -1,12 +1,11 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro</title>
+    <title>Cadastro - AlugaCar</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}" />
@@ -16,17 +15,11 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="icon" href="{% static 'img/icone.png' %}" />
 </head>
-
 <body>
-    <!-- HEADER -->
     <header>
-        <!-- MAIN HEADER -->
         <div id="header">
-            <!-- container -->
             <div class="container">
-                <!-- row -->
                 <div class="row">
-                    <!-- LOGO -->
                     <div class="col-md-3">
                         <div class="header-logo">
                             <a href="/" class="logo">
@@ -34,9 +27,6 @@
                             </a>
                         </div>
                     </div>
-                    <!-- /LOGO -->
-
-                    <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
                             <form>
@@ -51,41 +41,26 @@
                             </form>
                         </div>
                     </div>
-                    <!-- /SEARCH BAR -->
-
-                    <!-- ACCOUNT -->
                     <div class="col-md-3 clearfix">
                         <div class="header-ctn">
-
                             <div class="dropdown">
-
                                 <a href="/login" class="dropdown-toggle" aria-expanded="true">
 									<i class="fa fa-user"></i>
 									<span>{{cliente.nome}}</span>
 								</a>
-
                             </div>
-                            <!-- /Cart -->
-
-                            <!-- Menu Toogle -->
                             <div class="menu-toggle">
                                 <a href="#">
                                     <i class="fa fa-bars"></i>
                                     <span>Menu</span>
                                 </a>
                             </div>
-                            <!-- /Menu Toogle -->
                         </div>
                     </div>
-                    <!-- /ACCOUNT -->
                 </div>
-                <!-- row -->
             </div>
-            <!-- container -->
         </div>
-        <!-- /MAIN HEADER -->
     </header>
-    <!-- /HEADER -->
     <div class="login">
     <form method="POST">
         {% csrf_token %}
@@ -106,13 +81,9 @@
         <button type="submit">Cadastrar</button>
     </form>
     </div>
-<!-- FOOTER -->
 	<footer id="footer">
-		<!-- top footer -->
 		<div class="section" id="contato">
-			<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<div class="col-md-3 col-xs-6">
 						<div class="footer">
@@ -126,15 +97,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /top footer -->
-		<!-- bottom footer -->
 		<div id="bottom-footer" class="section">
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<ul class="footer-payments">
@@ -151,13 +117,9 @@
 						</span>
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /bottom footer -->
 	</footer>
-	<!-- /FOOTER -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>
@@ -165,5 +127,4 @@
 	<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 </body>
-
 </html>
