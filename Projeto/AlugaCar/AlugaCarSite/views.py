@@ -85,15 +85,16 @@ def new_modelo(request):
     return render(request, 'new_modelo.html', {'form': form, 'modelos':mo})
 
 def new_carro(request):
-    form = CarroForm(request.POST or None)
+    form = CarroForm(request.POST or None, request.FILES or None)
     if(form.is_valid()):
         form.save()
         return redirect("admin_page")
     return render(request, 'carro.html', {'form': form})
 
+
 def alt_carro(request, id):
     car = Carro.objects.get(id=id)
-    form = CarroForm(request.POST or None, instance=car)
+    form = CarroForm(request.POST or None, request.FILES or None, instance=car)
     if(form.is_valid()):
         form.save()
         return redirect("admin_page")
