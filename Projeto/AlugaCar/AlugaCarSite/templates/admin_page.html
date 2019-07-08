@@ -29,9 +29,7 @@
 					<!-- LOGO -->
 					<div class="col-md-9">
 						<div class="header-logo">
-
 							<img src="{% static '/img/banner.png' %}" alt="" width='225'>
-
 						</div>
 					</div>
 					<!-- /LOGO -->
@@ -39,10 +37,11 @@
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 							<div class="dropdown">
-								<a href="/login" onclick="return confirm('Deseja sair?');" class="dropdown-toggle"
+								<a href="{% url 'home_deslog'%}" onclick="return confirm('Deseja sair?');" class="dropdown-toggle"
 									aria-expanded="true">
 									<i class="fa fa-user"></i>
-									<span>{{cliente.nome}}</span>
+									<span>Administrador</span></br>
+									<b><span>Sair</span></b>
 								</a>
 							</div>
 							<!-- Menu Toogle -->
