@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Edit/Novo Veículo</title>
+	<title>Administrador - Aluga Car</title>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 	<link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}" />
@@ -33,14 +33,15 @@
 						</div>
 					</div>
 					<!-- /LOGO -->
-
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 							<div class="dropdown">
-								<a href="/login" class="dropdown-toggle" aria-expanded="true">
+								<a href="{% url 'home_deslog'%}" onclick="return confirm('Deseja sair?');"
+									class="dropdown-toggle" aria-expanded="true">
 									<i class="fa fa-user"></i>
-									<span>{{cliente.nome}}</span>
+									<span>Administrador</span></br>
+									<b><span>Sair</span></b>
 								</a>
 							</div>
 							<!-- Menu Toogle -->
@@ -64,7 +65,70 @@
 	<!-- /HEADER -->
 
 	<!-- CORPO -->
-
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<li><a href="/administrador">Início</a></li>
+					<li class="active"><a href="/novo/carro">Novo Veículo</a></li>
+					<li><a href="/novo/modelo">Novo Modelo</a></li>
+					<li><a href="/novo/marca">Nova Marca</a></li>
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+	<div class="container">
+		<div class="newcarro">
+			<form method="POST">
+				{% csrf_token %}
+				</br>
+				<label>Descrição</label>
+				</br>
+				{{form.descricao}}
+				</br>
+				<label>Disponível</label>
+				</br>
+				{{form.disponivel}}
+				</br>
+				<label>Valor diário</label>
+				</br>
+				{{form.valorDia}}
+				</br>
+				<label>Marca</label>
+				</br>
+				{{form.marca}}
+				</br>
+				<label>Modelo</label>
+				</br>
+				{{form.modelo}}
+				</br>
+				<label>Imagem</label>
+				</br>
+				{{form.caminhoFoto}}
+				</br>
+				</br>
+				<button type="submit"><i class="fa fa-check"></i> Salvar</button></br>
+				</br>
+			</form>
+		</div>
+		<div class="apagar">
+			{% if carro %}
+			<a href="{% url 'apaga_carro' carro.id %}" onclick="return confirm('Deseja apagar este carro?');">
+				<button class="secondary-btn"><i class="fa fa-times"></i> Excluir</button>
+			</a>
+			{% endif %}
+		</div>
+		</br>
+		</br>
+	</div>
 
 	<!-- /CORPO -->
 	<!-- FOOTER -->

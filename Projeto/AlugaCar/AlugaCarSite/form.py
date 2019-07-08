@@ -2,7 +2,7 @@ import datetime
 from django import forms
 
 
-from .models import Cliente, Aluguel
+from .models import Cliente, Aluguel, Marca, Modelo, Carro
 
 class PesquisaForm(forms.ModelForm):
     class Meta:
@@ -13,6 +13,7 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = {"email","senha","nome"}
+
 class LoginUserForm(forms.ModelForm):
     class Meta:
         model = Cliente
@@ -28,3 +29,18 @@ class AluguelForm(forms.ModelForm):
             'dataAlugado': forms.DateTimeInput()
         }
         fields = {"diasAluguel","dataAlugado"}
+
+class MarcaForm(forms.ModelForm):
+    class Meta:
+        model = Marca
+        fields = '__all__'
+
+class ModeloForm(forms.ModelForm):
+    class Meta:
+        model = Modelo
+        fields = '__all__'
+    
+class CarroForm(forms.ModelForm):
+    class Meta:
+        model = Carro
+        fields = '__all__'

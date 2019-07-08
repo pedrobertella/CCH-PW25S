@@ -37,8 +37,8 @@
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 							<div class="dropdown">
-								<a href="{% url 'home_deslog'%}" onclick="return confirm('Deseja sair?');" class="dropdown-toggle"
-									aria-expanded="true">
+								<a href="{% url 'home_deslog'%}" onclick="return confirm('Deseja sair?');"
+									class="dropdown-toggle" aria-expanded="true">
 									<i class="fa fa-user"></i>
 									<span>Administrador</span></br>
 									<b><span>Sair</span></b>
@@ -73,9 +73,9 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="/administrador">Início</a></li>
+					<li><a href="/administrador">Início</a></li>
 					<li><a href="/novo/carro">Novo Veículo</a></li>
-					<li><a href="/novo/modelo">Novo Modelo</a></li>
+					<li class="active"><a href="/novo/modelo">Novo Modelo</a></li>
 					<li><a href="/novo/marca">Nova Marca</a></li>
 				</ul>
 				<!-- /NAV -->
@@ -85,158 +85,70 @@
 		<!-- /container -->
 	</nav>
 	<!-- /NAVIGATION -->
-	<!-- SECTION -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
+	<div class="container">
+		<div class="newmodelo">
+			<form method="POST">
+				{% csrf_token %}
+				<br>
+				<label>Nome</label>
+				<br>
+				{{form.nome}}
+			</br>
+			</br>
+				<button type="submit"><i class="fa fa-plus"></i> Cadastrar</button></br>
+			</br>
+			</form>
+		</div>
+	</div>
 
-				<!-- section title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h3 class="title">Veículos</h3>
-					</div>
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<!-- section title -->
+			<div class="col-md-12">
+				<div class="section-title">
+					<h3 class="title">Modelos</h3>
 				</div>
-				<!-- /section title -->
-				<!-- Products tab & slick -->
-				<div class="col-md-12">
-					<div class="row">
+			</div>
+			<!-- /section title -->
+			<!-- Products tab & slick -->
+			<div class="col-md-12">
+				<div class="row">
+
 						<div class="products-tabs">
 							<!-- tab -->
 							<div id="tab1" class="tab-pane active">
 								<div class="products-slick" data-nav="#slick-nav-1">
-									{% for car in carros %}
+									{% for m in modelos %}
 
-									<div class="product c{{car.marca.id }}">
-										<div class="product-img">
-											<img src="{% static car.getfoto %}" alt="" height="180">
-											{% if car.disponivel %}
-											<div class="product-label">
-												<span class="sale">Disponivel</span>
-											</div>
-											{% endif %}
-										</div>
+									<div class="product c{{marca.id }}">
 										<div class="product-body">
-											<h3 class="product-name"><a href="#">{{car.descricao}}</a></h3>
-											<h4 class="product-price">R$ {{car.valorDia}}</h4>
+											<h1 class="product-name">{{m.nome}}</h1>
+											<h6>Selecione para apagar</h6>
 										</div>
 										<div class="add-to-cart">
-												<a href="{% url 'alt_carro' car.id %}"><button class="add-to-cart-btn"><i class="fa fa-pencil"></i>Editar</button></a>
+											<a href="{% url 'apaga_modelo' m.id %}" onclick="return confirm('Deseja apagar este modelo?');"><button class="add-to-cart-btn"><i class="fa fa-times"></i>Apagar</button></a>
 										</div>
 									</div>
 									{% endfor %}
-								</div>
-								<div id="slick-nav-1" class="products-slick-nav"></div>
 							</div>
-							<!-- /tab -->
+							<div id="slick-nav-1" class="products-slick-nav"></div>
 						</div>
+						<!-- /tab -->
 					</div>
 				</div>
-				<!-- Products tab & slick -->
 			</div>
-			<!-- /row -->
+			<!-- Products tab & slick -->
 		</div>
-		<!-- /container -->
+		<!-- /row -->
 	</div>
-	<!-- /SECTION -->
-	<!-- SECTION -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				<!-- section title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h3 class="title">Carros Alugados</h3>
-					</div>
-				</div>
-				<!-- /section title -->
-				<!-- Products tab & slick -->
-				<div class="col-md-12">
-					<div class="row">
-						<div class="products-tabs">
-							<!-- tab -->
-							<div id="tab2" class="tab-pane active">
-								<div class="products-slick" data-nav="#slick-nav-2">
-									{% for alu in alugueis %}
+	<!-- /container -->
+</div>
 
-									<div class="product c{{alu.carrro.marca.id }}">
-										<div class="product-img">
-											<img src="{% static alu.carrro.getfoto %}" alt="" height="180">
-										</div>
-										<div class="product-body">
-											<h3 class="product-name">{{alu.carrro.descricao}}</h3>
-											<h4 class="product-name">{{alu.cliente}}</h4>
-											<h4 class="product-price">R$ {{alu.valorPagar}}</h4>
-										</div>
-										<div class="add-to-cart">
-												<a href="{% url 'cancelar_aluguel_admin' alu.id %}" onclick="return confirm('Deseja cancelar o aluguel deste carro?');"><button class="add-to-cart-btn"><i class="fa fa-ban"></i>Cancelar</button></a>
-										</div>
-									</div>
-									{% endfor %}
-								</div>
-								<div id="slick-nav-2" class="products-slick-nav"></div>
-							</div>
-							<!-- /tab -->
-						</div>
-					</div>
-				</div>
-				<!-- Products tab & slick -->
-			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /SECTION -->
-	<!-- SECTION -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-
-				<!-- section title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h3 class="title">Clientes</h3>
-					</div>
-				</div>
-				<!-- /section title -->
-				<!-- Products tab & slick -->
-				<div class="col-md-12">
-					<div class="row">
-						<div class="products-tabs">
-							<!-- tab -->
-							<div id="tab3" class="tab-pane fade in active">
-								<div class="products-slick" data-nav="#slick-nav-3">
-									{% for user in usuarios %}
-
-									<div class="product c{{user.id }}">
-										<div class="product-body">
-											<h3 class="product-name"><a href="#">{{user.nome}}</a></h3>
-											<h4 class="product-price">{{user.email}}</h4>
-										</div>
-										<div class="add-to-cart">
-												<a href="{% url 'apaga_user_admin' user.id %}" onclick="return confirm('Deseja apagar este usuário?');"><button class="add-to-cart-btn"><i class="fa fa-times"></i>Apagar</button></a>
-										</div>
-									</div>
-									{% endfor %}
-								</div>
-								<div id="slick-nav-3" class="products-slick-nav"></div>
-							</div>
-							<!-- /tab -->
-						</div>
-					</div>
-				</div>
-				<!-- Products tab & slick -->
-			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /SECTION -->
 	<!-- /CORPO -->
 	<!-- FOOTER -->
 	<footer id="footer">

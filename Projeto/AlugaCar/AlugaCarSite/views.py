@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from django.shortcuts import render, redirect
-from .form import ClienteForm, LoginUserForm, AluguelForm, PesquisaForm
-from .models import Cliente, Carro, Aluguel, Marca
+from .form import ClienteForm, LoginUserForm, AluguelForm, PesquisaForm, MarcaForm, ModeloForm, CarroForm
+from .models import Cliente, Carro, Aluguel, Marca, Modelo
 
 '''def home(request):
     id = request.session.get('login', None)
@@ -68,6 +68,36 @@ def cadastro_user(request):
         return redirect("home")
     return render(request, 'cadastro_user.html', {'form': form})
 
+def new_marca(request):
+    form = MarcaForm(request.POST or None)
+    ma = Marca.objects.all()
+    if(form.is_valid()):
+        form.save()
+        return redirect("admin_page")
+    return render(request, 'new_marca.html', {'form': form, 'marcas':ma})
+
+def new_modelo(request):
+    form = ModeloForm(request.POST or None)
+    mo = Modelo.objects.all()
+    if(form.is_valid()):
+        form.save()
+        return redirect("admin_page")
+    return render(request, 'new_modelo.html', {'form': form, 'modelos':mo})
+
+def new_carro(request):
+    form = CarroForm(request.POST or None)
+    if(form.is_valid()):
+        form.save()
+        return redirect("admin_page")
+    return render(request, 'carro.html', {'form': form})
+
+def alt_carro(request, id):
+    car = Carro.objects.get(id=id)
+    form = CarroForm(request.POST or None, instance=car)
+    if(form.is_valid()):
+        form.save()
+        return redirect("admin_page")
+    return render(request, 'carro.html', {'form': form, 'carro': car})
 
 def login_user(request):
     form = LoginUserForm(request.POST or None)
@@ -138,6 +168,21 @@ def cancelar_aluguel_admin(request, id):
 def apaga_user_admin(request, id):
     user = Cliente.objects.get(id=id)
     user.delete()
+    return redirect("admin_page")
+
+def apaga_marca(request, id):
+    marca = Marca.objects.get(id=id)
+    marca.delete()
+    return redirect("new_marca")
+
+def apaga_modelo(request, id):
+    modelo = Modelo.objects.get(id=id)
+    modelo.delete()
+    return redirect("new_modelo")
+
+def apaga_carro(request, id):
+    car = Carro.objects.get(id=id)
+    car.delete()
     return redirect("admin_page")
 
 def home_deslog(request):
