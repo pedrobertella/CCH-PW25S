@@ -1,7 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,24 +15,16 @@
 	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
 	<link rel="icon" href="{% static 'img/icone.png' %}" />
 </head>
-
 <body>
-	<!-- HEADER -->
 	<header>
-		<!-- MAIN HEADER -->
 		<div id="header">
-			<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
-					<!-- LOGO -->
 					<div class="col-md-9">
 						<div class="header-logo">
 							<img src="{% static '/img/banner.png' %}" alt="" width='225'>
 						</div>
 					</div>
-					<!-- /LOGO -->
-					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 							<div class="dropdown">
@@ -44,48 +35,31 @@
 									<b><span>Sair</span></b>
 								</a>
 							</div>
-							<!-- Menu Toogle -->
 							<div class="menu-toggle">
 								<a href="#">
 									<i class="fa fa-bars"></i>
 									<span>Menu</span>
 								</a>
 							</div>
-							<!-- /Menu Toogle -->
 						</div>
 					</div>
-					<!-- /ACCOUNT -->
 				</div>
-				<!-- row -->
 			</div>
-			<!-- container -->
 		</div>
-		<!-- /MAIN HEADER -->
 	</header>
-	<!-- /HEADER -->
-
-	<!-- CORPO -->
-	<!-- NAVIGATION -->
 	<nav id="navigation">
-		<!-- container -->
 		<div class="container">
-			<!-- responsive-nav -->
 			<div id="responsive-nav">
-				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
 					<li><a href="/administrador">Início</a></li>
 					<li><a href="/novo/carro">Novo Veículo</a></li>
 					<li><a href="/novo/modelo">Novo Modelo</a></li>
 					<li class="active"><a href="/novo/marca">Nova Marca</a></li>
 				</ul>
-				<!-- /NAV -->
 			</div>
-			<!-- /responsive-nav -->
 		</div>
-		<!-- /container -->
 	</nav>
-	<!-- /NAVIGATION -->
-	<div class="container">
+	<div class="container" style="text-align: center">
 		<div class="newmarca">
 			<form method="POST">
 				{% csrf_token %}
@@ -100,31 +74,20 @@
 			</form>
 		</div>
 	</div>
-
-<!-- SECTION -->
 <div class="section">
-	<!-- container -->
 	<div class="container">
-		<!-- row -->
 		<div class="row">
-
-			<!-- section title -->
 			<div class="col-md-12">
 				<div class="section-title">
 					<h3 class="title">Marcas</h3>
 				</div>
 			</div>
-			<!-- /section title -->
-			<!-- Products tab & slick -->
 			<div class="col-md-12">
 				<div class="row">
-
 						<div class="products-tabs">
-							<!-- tab -->
 							<div id="tab1" class="tab-pane active">
 								<div class="products-slick" data-nav="#slick-nav-1">
 									{% for m in marcas %}
-
 									<div class="product c{{marca.id }}">
 										<div class="product-body">
 											<h1 class="product-name">{{m.nome}}</h1>
@@ -138,25 +101,15 @@
 							</div>
 							<div id="slick-nav-1" class="products-slick-nav"></div>
 						</div>
-						<!-- /tab -->
 					</div>
 				</div>
 			</div>
-			<!-- Products tab & slick -->
 		</div>
-		<!-- /row -->
 	</div>
-	<!-- /container -->
 </div>
-
-	<!-- /CORPO -->
-	<!-- FOOTER -->
 	<footer id="footer">
-		<!-- top footer -->
 		<div class="section" id="contato">
-			<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<div class="col-md-3 col-xs-6">
 						<div class="footer">
@@ -173,15 +126,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /top footer -->
-		<!-- bottom footer -->
 		<div id="bottom-footer" class="section">
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<ul class="footer-payments">
@@ -198,14 +146,9 @@
 						</span>
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /bottom footer -->
 	</footer>
-	<!-- /FOOTER -->
-	<!-- jQuery Plugins -->
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>
@@ -213,5 +156,4 @@
 	<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 </body>
-
 </html>
