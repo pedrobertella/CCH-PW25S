@@ -1,7 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,24 +15,16 @@
 	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
 	<link rel="icon" href="{% static 'img/icone.png' %}" />
 </head>
-
 <body>
-	<!-- HEADER -->
 	<header>
-		<!-- MAIN HEADER -->
 		<div id="header">
-			<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
-					<!-- LOGO -->
 					<div class="col-md-9">
 						<div class="header-logo">
 							<img src="{% static '/img/banner.png' %}" alt="" width='225'>
 						</div>
 					</div>
-					<!-- /LOGO -->
-					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 							<div class="dropdown">
@@ -44,50 +35,33 @@
 									<b><span>Sair</span></b>
 								</a>
 							</div>
-							<!-- Menu Toogle -->
 							<div class="menu-toggle">
 								<a href="#">
 									<i class="fa fa-bars"></i>
 									<span>Menu</span>
 								</a>
 							</div>
-							<!-- /Menu Toogle -->
 						</div>
 					</div>
-					<!-- /ACCOUNT -->
 				</div>
-				<!-- row -->
 			</div>
-			<!-- container -->
 		</div>
-		<!-- /MAIN HEADER -->
 	</header>
-	<!-- /HEADER -->
-
-	<!-- CORPO -->
-	<!-- NAVIGATION -->
 	<nav id="navigation">
-		<!-- container -->
 		<div class="container">
-			<!-- responsive-nav -->
 			<div id="responsive-nav">
-				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
 					<li><a href="/administrador">Início</a></li>
 					<li class="active"><a href="/novo/carro">Novo Veículo</a></li>
 					<li><a href="/novo/modelo">Novo Modelo</a></li>
 					<li><a href="/novo/marca">Nova Marca</a></li>
 				</ul>
-				<!-- /NAV -->
 			</div>
-			<!-- /responsive-nav -->
 		</div>
-		<!-- /container -->
 	</nav>
-	<!-- /NAVIGATION -->
 	<div class="container">
 		<div class="newcarro">
-			<form method="POST" enctype="multipart/form-data">
+			<form method="POST" enctype="multipart/form-data"  style="text-align: center">
 				{% csrf_token %}
 				</br>
 				<label>Descrição</label>
@@ -129,15 +103,9 @@
 		</br>
 		</br>
 	</div>
-
-	<!-- /CORPO -->
-	<!-- FOOTER -->
 	<footer id="footer">
-		<!-- top footer -->
 		<div class="section" id="contato">
-			<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<div class="col-md-3 col-xs-6">
 						<div class="footer">
@@ -154,15 +122,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /top footer -->
-		<!-- bottom footer -->
 		<div id="bottom-footer" class="section">
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<ul class="footer-payments">
@@ -179,14 +142,9 @@
 						</span>
 					</div>
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
-		<!-- /bottom footer -->
 	</footer>
-	<!-- /FOOTER -->
-	<!-- jQuery Plugins -->
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'js/slick.min.js' %}"></script>
@@ -194,5 +152,4 @@
 	<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 </body>
-
 </html>
