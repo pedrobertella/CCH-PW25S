@@ -3,34 +3,8 @@ from django.shortcuts import render, redirect
 from .form import ClienteForm, LoginUserForm, AluguelForm, PesquisaForm, MarcaForm, ModeloForm, CarroForm
 from .models import Cliente, Carro, Aluguel, Marca, Modelo
 
-'''def home(request):
-    id = request.session.get('login', None)
-    if not id or id<0:
-        user = Cliente("-1","Login","-1")
-    else:
-        user = Cliente.objects.get(id=id)
-    carros = Carro.objects.all()
-    marcas = Marca.objects.all()
-
-    alugueis = Aluguel.objects.all()
-    horarios =[]
-    for i in carros:
-        hor = car_hor(i.carro.id)
-        for j in alugueis:
-            if(j.carro.id == i.id):
-                hor.addHorario(j.dataAlugado)
-                p=0
-                while p<j.diasAluguel:
-                    prox = date.fromordinal(j.dataAlugado.toordinal()+p)
-                    hor.addHorario(prox)
-                    p+=1
-        horarios.append(hor)
-
-    return render(request, "index.html",{'cliente':user,'carros':carros,'marcas':marcas,'horarios':horarios})
-'''
-
-
 def home(request):
+    apaga_alugueis_antigos()
     form = PesquisaForm(request.POST or None)
     id = request.session.get('login', None)
     if not id or id < 0:
@@ -60,6 +34,14 @@ def home(request):
             cars.append(i)
     return render(request, "index.html", {'cliente': user, 'carros': cars, 'marcas': marcas, "form": form})
 
+def apaga_alugueis_antigos():
+    alu = Aluguel.objects.all()
+    d = date.today()
+    for a in alu:
+        print("estou aqui")
+        i = date.fromordinal(a.dataAlugado.toordinal()+a.diasAluguel)
+        if i < d:
+            a.delete()
 
 def alugar_confirm(request, id,dat):
     dat = datetime.strptime(dat, '%Y-%m-%d').date()

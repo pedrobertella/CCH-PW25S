@@ -209,13 +209,14 @@
 			<div class="row">
 				{% for car in carros %}
 				{% if car.disponivel %}
-				<div class="col-md-4 col-xs-6">
+				<div class="col-md-4 col-xs-6 c{{car.marca.id}}">
 					<div class="shop">
 						<div class="shop-img">
 							<img src="{% static car.getfoto %}" height="250" alt="">
 						</div>
 						<div class="shop-body">
 							<h3>{{car.descricao}}</h3>
+							<h4>R$ {{car.valorDia}}</h4>
 							<a onclick="alugar({{car.id}})" class="cta-btn">Alugar <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
