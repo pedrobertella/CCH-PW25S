@@ -164,7 +164,7 @@ def login_user(request):
                     request.session['login'] = i.id
                     user = Cliente.objects.get(id=i.id)
                     carros = Carro.objects.all()
-                    return render(request, "index.html", {'cliente': user, 'carros': carros})
+                    return redirect("home")
     return render(request, 'login.html', {'form': form})
 
 def admin_page(request):
