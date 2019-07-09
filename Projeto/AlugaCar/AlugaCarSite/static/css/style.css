@@ -760,6 +760,11 @@ form button:hover{
   position: relative;
   overflow: hidden;
   margin: 15px 0px;
+
+
+}
+.shop img{
+  width:100%;
 }
 
 .shop:before {
